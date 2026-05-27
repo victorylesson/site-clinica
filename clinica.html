@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumena Estética - Clínica de Beleza e Bem-Estar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --rose: #c97d88;
+        --rose-dark: #a55a67;
+        --blush: #f5e6e8;
+        --blush2: #faf3f4;
+        --sand: #e8ddd5;
+        --green: #6b8f71;
+        --white: #ffffff;
+        --dark: #2d2026;
+        --gray: #7a6e72;
+        --light-gray: #b8adb1;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--white);
+        color: var(--dark);
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
+        padding: 18px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(201, 125, 136, 0.12);
+      }
+      .logo {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.6rem;
+        color: var(--rose-dark);
+      }
+      .logo span {
+        color: var(--green);
+        font-style: italic;
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--gray);
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: var(--rose-dark);
+      }
+      .nav-btn {
+        background: var(--rose);
+        color: var(--white);
+        padding: 11px 24px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .nav-btn:hover {
+        background: var(--rose-dark);
+      }
+
+      .hero {
+        min-height: 100vh;
+        background: var(--blush2);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        padding: 100px 5% 60px;
+        gap: 60px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(201, 125, 136, 0.1),
+          transparent 70%
+        );
+        top: -100px;
+        right: -100px;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(107, 143, 113, 0.12);
+        color: var(--green);
+        padding: 8px 18px;
+        border-radius: 50px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        margin-bottom: 22px;
+        letter-spacing: 0.5px;
+      }
+      .badge-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+      .hero h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.12;
+        color: var(--dark);
+        margin-bottom: 22px;
+      }
+      .hero h1 em {
+        color: var(--rose-dark);
+        font-style: italic;
+      }
+      .hero p {
+        color: var(--gray);
+        font-size: 1.02rem;
+        line-height: 1.8;
+        margin-bottom: 36px;
+        max-width: 440px;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .btn-rose {
+        background: var(--rose);
+        color: #fff;
+        padding: 16px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        box-shadow: 0 8px 28px rgba(201, 125, 136, 0.35);
+      }
+      .btn-rose:hover {
+        background: var(--rose-dark);
+        transform: translateY(-2px);
+      }
+      .btn-link {
+        color: var(--rose-dark);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-bottom: 1px solid var(--rose);
+        padding-bottom: 2px;
+      }
+      .hero-img-wrap {
+        position: relative;
+      }
+      .hero-img-wrap img {
+        width: 100%;
+        height: 580px;
+        object-fit: cover;
+        border-radius: 24px 24px 120px 24px;
+        display: block;
+      }
+      .hero-card {
+        position: absolute;
+        bottom: 30px;
+        left: -30px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 18px 22px;
+        box-shadow: 0 12px 40px rgba(45, 32, 38, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 200px;
+      }
+      .card-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: var(--blush);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+      }
+      .card-info .card-num {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.6rem;
+        color: var(--rose-dark);
+      }
+      .card-info .card-text {
+        font-size: 0.75rem;
+        color: var(--light-gray);
+      }
+      .hero-card2 {
+        position: absolute;
+        top: 40px;
+        right: -20px;
+        background: var(--green);
+        border-radius: 16px;
+        padding: 16px 20px;
+        box-shadow: 0 12px 40px rgba(107, 143, 113, 0.3);
+        color: #fff;
+      }
+      .hero-card2 .tag {
+        font-size: 0.7rem;
+        opacity: 0.8;
+        margin-bottom: 4px;
+      }
+      .hero-card2 .val {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.4rem;
+      }
+
+      .trust {
+        padding: 30px 5%;
+        background: var(--rose);
+      }
+      .trust-inner {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #fff;
+        font-size: 0.88rem;
+      }
+      .trust-check {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+      }
+
+      .services {
+        padding: 100px 5%;
+        background: var(--white);
+      }
+      .section-tag {
+        display: inline-block;
+        background: var(--blush);
+        color: var(--rose-dark);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-bottom: 16px;
+        letter-spacing: 0.5px;
+      }
+      .section-title {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--dark);
+        margin-bottom: 12px;
+      }
+      .section-sub {
+        color: var(--gray);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        max-width: 500px;
+        margin-bottom: 60px;
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+      .service-card {
+        background: var(--blush2);
+        border-radius: 20px;
+        padding: 36px 28px;
+        border: 1.5px solid transparent;
+        transition: all 0.3s;
+      }
+      .service-card:hover {
+        border-color: var(--rose);
+        background: #fff;
+        box-shadow: 0 16px 40px rgba(201, 125, 136, 0.12);
+        transform: translateY(-6px);
+      }
+      .svc-icon-wrap {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: var(--blush);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        margin-bottom: 22px;
+      }
+      .service-card h3 {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.2rem;
+        color: var(--dark);
+        margin-bottom: 10px;
+      }
+      .service-card p {
+        color: var(--gray);
+        font-size: 0.87rem;
+        line-height: 1.75;
+        margin-bottom: 18px;
+      }
+      .svc-link {
+        color: var(--rose-dark);
+        font-size: 0.82rem;
+        font-weight: 500;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .svc-link::after {
+        content: "→";
+      }
+
+      .how {
+        padding: 100px 5%;
+        background: var(--blush2);
+      }
+      .how-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        margin-top: 60px;
+      }
+      .how-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      .how-step {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      .step-num {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--rose);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .step-body h4 {
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+      .step-body p {
+        color: var(--gray);
+        font-size: 0.87rem;
+        line-height: 1.7;
+      }
+      .how-img img {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        border-radius: 24px;
+        display: block;
+      }
+
+      .reviews {
+        padding: 100px 5%;
+        background: #fff;
+      }
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 60px;
+      }
+      .review-card {
+        background: var(--blush2);
+        border-radius: 20px;
+        padding: 32px 26px;
+        border: 1.5px solid transparent;
+        transition: border-color 0.3s;
+      }
+      .review-card:hover {
+        border-color: rgba(201, 125, 136, 0.3);
+      }
+      .stars {
+        display: flex;
+        gap: 3px;
+        margin-bottom: 16px;
+      }
+      .star {
+        width: 16px;
+        height: 16px;
+        fill: #f4a347;
+      }
+      .review-text {
+        color: var(--gray);
+        font-size: 0.9rem;
+        line-height: 1.8;
+        margin-bottom: 22px;
+        font-style: italic;
+      }
+      .reviewer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .reviewer-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #fff;
+      }
+      .reviewer-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--dark);
+      }
+      .reviewer-role {
+        font-size: 0.78rem;
+        color: var(--light-gray);
+      }
+
+      .cta-section {
+        margin: 0 5% 80px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+        padding: 80px 60px;
+        text-align: center;
+        box-shadow: 0 24px 60px rgba(201, 125, 136, 0.3);
+      }
+      .cta-section h2 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        color: #fff;
+        margin-bottom: 14px;
+      }
+      .cta-section p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.98rem;
+        line-height: 1.8;
+        max-width: 480px;
+        margin: 0 auto 36px;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-white {
+        background: #fff;
+        color: var(--rose-dark);
+        padding: 16px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+      }
+      .btn-white:hover {
+        background: var(--blush);
+        transform: translateY(-2px);
+      }
+      .btn-outline-w {
+        background: transparent;
+        color: #fff;
+        padding: 16px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        transition: all 0.3s;
+      }
+      .btn-outline-w:hover {
+        border-color: #fff;
+      }
+
+      footer {
+        background: var(--dark);
+        padding: 60px 5% 28px;
+      }
+      .footer-top {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 50px;
+        margin-bottom: 50px;
+      }
+      .footer-logo {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.5rem;
+        color: #fff;
+        margin-bottom: 14px;
+      }
+      .footer-logo span {
+        color: var(--rose);
+        font-style: italic;
+      }
+      .footer-top p {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+      .footer-col h4 {
+        color: var(--rose);
+        font-size: 0.78rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      .footer-col a {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.85rem;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+        transition: color 0.3s;
+      }
+      .footer-col a:hover {
+        color: var(--rose);
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 24px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 0.78rem;
+      }
+
+      .whatsapp-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 999;
+        background: #25d366;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+        transition: transform 0.3s;
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+      }
+      .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+        fill: #fff;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .hero-img-wrap {
+          display: none;
+        }
+        .how-grid {
+          grid-template-columns: 1fr;
+        }
+        .how-img {
+          display: none;
+        }
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+        .cta-section {
+          margin: 0 0 60px;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">Lumena <span>Estética</span></div>
+      <ul class="nav-links">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#como">Como Funciona</a></li>
+        <li><a href="#avaliacoes">Depoimentos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a href="https://wa.me/5581991482982" class="nav-btn" target="_blank"
+        >Agendar Horário</a
+      >
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span> Clínica certificada e equipamentos de
+          última geração
+        </div>
+        <h1>Você merece se sentir <em>incrível</em> todos os dias</h1>
+        <p>
+          Tratamentos estéticos personalizados para o seu tipo de pele, seu
+          ritmo de vida e o resultado que você sempre quis. Sem pressa, sem
+          promessas vazias, com ciência e cuidado real.
+        </p>
+        <div class="hero-btns">
+          <a href="https://wa.me/5581991482982" class="btn-rose" target="_blank"
+            >Agendar Agora</a
+          >
+          <a href="#servicos" class="btn-link">Ver Tratamentos</a>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=80"
+          alt="Clínica Lumena"
+        />
+        <div class="hero-card">
+          <div class="card-icon">✨</div>
+          <div class="card-info">
+            <div class="card-num">1.400+</div>
+            <div class="card-text">clientes satisfeitas</div>
+          </div>
+        </div>
+        <div class="hero-card2">
+          <div class="tag">Resultado médio</div>
+          <div class="val">30 dias</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="trust-inner">
+        <div class="trust-item">
+          <span class="trust-check">✓</span> Procedimentos seguros e
+          regulamentados
+        </div>
+        <div class="trust-item">
+          <span class="trust-check">✓</span> Profissionais especializadas
+        </div>
+        <div class="trust-item">
+          <span class="trust-check">✓</span> Atendimento individual e
+          personalizado
+        </div>
+        <div class="trust-item">
+          <span class="trust-check">✓</span> Produtos dermocosméticos premium
+        </div>
+      </div>
+    </div>
+
+    <section class="services" id="servicos">
+      <span class="section-tag">Nossos Tratamentos</span>
+      <h2 class="section-title">Cada tratamento pensado<br />para você</h2>
+      <p class="section-sub">
+        Do rosto ao corpo, desenvolvemos protocolos personalizados com
+        tecnologia e atenção que só a Lumena oferece.
+      </p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="svc-icon-wrap">🌸</div>
+          <h3>Tratamento Facial</h3>
+          <p>
+            Hidratação profunda, limpeza de pele, botox, preenchimento e
+            bioestimuladores. Protocolos sob medida para cada tipo de pele.
+          </p>
+          <a href="https://wa.me/5581991482982" class="svc-link" target="_blank"
+            >Agendar</a
+          >
+        </div>
+        <div class="service-card">
+          <div class="svc-icon-wrap">💆</div>
+          <h3>Modelagem Corporal</h3>
+          <p>
+            Criolipólise, radiofrequência, drenagem linfática e massagem
+            modeladora. Resultados comprovados sem cirurgia.
+          </p>
+          <a href="https://wa.me/5581991482982" class="svc-link" target="_blank"
+            >Agendar</a
+          >
+        </div>
+        <div class="service-card">
+          <div class="svc-icon-wrap">✨</div>
+          <h3>Depilação a Laser</h3>
+          <p>
+            Tecnologia de ponta para todos os fototipos de pele. Definitiva,
+            indolor e com protocolos de segurança rigorosos.
+          </p>
+          <a href="https://wa.me/5581991482982" class="svc-link" target="_blank"
+            >Agendar</a
+          >
+        </div>
+        <div class="service-card">
+          <div class="svc-icon-wrap">🌿</div>
+          <h3>Bem-Estar e Relaxamento</h3>
+          <p>
+            Massagem relaxante, pedras quentes e aromaterapia. Uma pausa real
+            para o seu corpo e a sua mente.
+          </p>
+          <a href="https://wa.me/5581991482982" class="svc-link" target="_blank"
+            >Agendar</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="como">
+      <span class="section-tag">Como Funciona</span>
+      <h2 class="section-title">Simples, acolhedor<br />e sem complicação</h2>
+      <div class="how-grid">
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Você entra em contato</h4>
+              <p>
+                Manda uma mensagem no WhatsApp ou preenche nosso formulário.
+                Respondemos em poucos minutos e já buscamos o melhor horário
+                para você.
+              </p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Avaliação personalizada</h4>
+              <p>
+                Na primeira visita, nossa esteticista analisa sua pele, seu
+                objetivo e sua rotina. Nada de protocolo padrão para todo mundo.
+              </p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Tratamento sob medida</h4>
+              <p>
+                Realizamos os procedimentos num ambiente confortável, com toda a
+                atenção e os melhores produtos do mercado.
+              </p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>Acompanhamento contínuo</h4>
+              <p>
+                Monitoramos a evolução, ajustamos o protocolo e ficamos
+                disponíveis entre as sessões para qualquer dúvida.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="how-img">
+          <img
+            src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80"
+            alt="Atendimento Lumena"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="avaliacoes">
+      <span class="section-tag">Depoimentos</span>
+      <h2 class="section-title">Clientes que<br />se transformaram</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+          </div>
+          <p class="review-text">
+            Fiz o protocolo facial por três meses e minha pele nunca esteve tão
+            bonita. Minha autoestima mudou completamente. O ambiente é super
+            acolhedor, me sinto em casa lá.
+          </p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">JL</div>
+            <div>
+              <div class="reviewer-name">Juliana Lima</div>
+              <div class="reviewer-role">Professora universitária</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+          </div>
+          <p class="review-text">
+            A criolipólise superou minhas expectativas. Perdi medidas em áreas
+            que nem a academia conseguia. Atendimento profissional do início ao
+            fim, sem pressão para comprar nada.
+          </p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">CB</div>
+            <div>
+              <div class="reviewer-name">Carla Barbosa</div>
+              <div class="reviewer-role">Enfermeira</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+            <svg class="star" viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+          </div>
+          <p class="review-text">
+            Fiz a depilação a laser e ficou perfeita, sem dor e com resultado
+            desde a primeira sessão. Já indiquei para cinco amigas e todas
+            amaram. Clínica impecável.
+          </p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">TN</div>
+            <div>
+              <div class="reviewer-name">Tânia Nascimento</div>
+              <div class="reviewer-role">Administradora</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-section" id="contato">
+      <h2>Agende sua avaliação gratuita hoje</h2>
+      <p>
+        Converse com nossa equipe, tire todas as suas dúvidas e descubra o
+        tratamento certo para o seu objetivo. Sem compromisso.
+      </p>
+      <div class="cta-btns">
+        <a href="https://wa.me/5581991482982" class="btn-white" target="_blank"
+          >Falar no WhatsApp</a
+        >
+        <a href="mailto:victory.mendes@hotmail.com" class="btn-outline-w"
+          >Enviar E-mail</a
+        >
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">Lumena <span>Estética</span></div>
+          <p>
+            Cuidamos de você com técnica, afeto e o compromisso de entregar
+            resultados reais que elevam sua autoestima.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Tratamentos</h4>
+          <a href="#">Facial</a>
+          <a href="#">Corporal</a>
+          <a href="#">Depilação a Laser</a>
+          <a href="#">Bem-Estar</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <a href="https://wa.me/5581991482982">(81) 99148-2982</a>
+          <a href="mailto:victory.mendes@hotmail.com"
+            >victory.mendes@hotmail.com</a
+          >
+          <a href="#">Ter–Sáb: 9h às 19h</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Lumena Estética. Todos os direitos reservados.
+      </div>
+    </footer>
+
+    <a
+      href="https://wa.me/5581991482982"
+      class="whatsapp-float"
+      target="_blank"
+    >
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+    </a>
+  </body>
+</html>
